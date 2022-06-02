@@ -6,20 +6,18 @@ function createGrid(size){
         let box = document.createElement('div');
         box.classList.add("box-style");
         document.querySelector("#container").appendChild(box);
-        gridBoxes.push(box)
-        /*
-        box.addEventListener('mousemove', function () {
-            this.classList.add("black-bg");
-        });
-        */
+        gridBoxes.push(box);
     }
 }
-
 
 function addColor(){
     this.classList.add("black-bg");
 }
 
+
+//Activates 'drawing' action on click 
+//and Deactivates 'drawing' action once click is released.
+//This allows user to click and drag mouse to fill in boxes.
 window.addEventListener("mousedown", function(){
     gridBoxes.forEach(x => {
         x.addEventListener('mousemove', addColor);
@@ -32,5 +30,38 @@ window.addEventListener("mouseup", function () {
     });
 });
 
+
+function getUserInput(timesAsked){
+    let prompt;
+
+    if(timesAsked > 1){
+        prompt = "Oops! That's not a valid number. The original Etch-A-Sketch grid size is 16x16. Please enter a number between 10 and 100 to determine a new grid size.";
+    }else{
+        prompt = "The original Etch-A-Sketch grid size is 16x16. Please enter a number between 10 and 100 to determine a new grid size.";
+    }
+
+    let input = window.prompt(prompt, "16");
+
+    if (input === null) {
+        return 16;
+    }else if (parseInt(input) >= 10 && parseInt(input) <= 100){
+        return parseInt(input);
+    }else{
+        return getUserInput(2);
+    }
+}
+
+function reset(){
+    let userInput = getUserInput(1);
+    gridSize = userInput * userInput;
+    gridBoxes.forEach(box => document.querySelector("#container").removeChild(box));
+    gridBoxes = [];
+    document.querySelector("#container").setAttribute('style', `grid-template:repeat(${userInput},1fr) / repeat(${userInput}, 1fr)`);
+    createGrid(gridSize);
+}
+
+
 createGrid(gridSize);
+
+document.querySelector("#reset").addEventListener("click", reset);
 
