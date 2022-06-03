@@ -1,5 +1,7 @@
 let gridSize = 256;
 let gridBoxes = [];
+let currentColor = "black";
+let colorBoxes = document.querySelectorAll(".colors");
 
 function createGrid(size){
     let containerWidth = document.querySelector("#container").offsetWidth;
@@ -14,14 +16,24 @@ function createGrid(size){
     }
 }
 
-function addColor(){
-    this.classList.add("black-bg");
+function changeColor(){
+    currentColor = this.id;
 }
 
+function addColor(){
+    //this.classList.add("black-bg");
+    this.style.background = currentColor;
+}
+
+
+colorBoxes.forEach(x => {
+    x.addEventListener("click", changeColor);
+});
 
 //Activates 'drawing' action on click 
 //and Deactivates 'drawing' action once click is released.
 //This allows user to click and drag mouse to fill in boxes.
+
 window.addEventListener("mousedown", function(){
     gridBoxes.forEach(x => {
         x.addEventListener('mousemove', addColor);
@@ -33,6 +45,7 @@ window.addEventListener("mouseup", function () {
         x.removeEventListener('mousemove', addColor);
     });
 });
+
 
 
 function getUserInput(timesAsked){
@@ -68,4 +81,5 @@ function reset(){
 createGrid(gridSize);
 
 document.querySelector("#reset").addEventListener("click", reset);
+
 
