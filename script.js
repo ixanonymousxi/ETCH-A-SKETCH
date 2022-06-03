@@ -2,11 +2,15 @@ let gridSize = 256;
 let gridBoxes = [];
 
 function createGrid(size){
+    let containerWidth = document.querySelector("#container").offsetWidth;
+    document.querySelector("#container").style.height = containerWidth + 'px';
+
     for(let i = 0; i < size; i++){
         let box = document.createElement('div');
         box.classList.add("box-style");
-        document.querySelector("#container").appendChild(box);
         gridBoxes.push(box);
+
+        document.querySelector("#container").appendChild(box);
     }
 }
 
