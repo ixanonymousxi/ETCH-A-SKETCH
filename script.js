@@ -4,8 +4,8 @@ let currentColor = "black";
 let colorBoxes = document.querySelectorAll(".colors");
 
 function createGrid(size){
-    let containerWidth = document.querySelector("#container").offsetWidth;
-    document.querySelector("#container").style.height = containerWidth + 'px';
+    let containerHeight = document.querySelector("#container").offsetHeight;
+    document.querySelector("#container").style.width = containerHeight + 'px';
 
     for(let i = 0; i < size; i++){
         let box = document.createElement('div');

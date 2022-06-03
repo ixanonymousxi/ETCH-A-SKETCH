@@ -19,8 +19,8 @@ h1{
 }
 
 #container{
-    width:50%;
-    /* height:75vh; */
+    /* width:50%; */
+    height:75vh;
     display:grid;
     grid-template: repeat(16,1fr) / repeat(16, 1fr);
     border: 1px solid rgb(215, 215, 215);
