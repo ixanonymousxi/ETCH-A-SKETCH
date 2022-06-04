@@ -1,10 +1,10 @@
 let gridSize = 256;
 let gridBoxes = [];
 let currentColor = "black";
-let colorBoxes = document.querySelectorAll(".colors");
+const colorBoxes = document.querySelectorAll(".colors");
 
 function createGrid(size){
-    let containerHeight = document.querySelector("#container").offsetHeight;
+    const containerHeight = document.querySelector("#container").offsetHeight;
     document.querySelector("#container").style.width = containerHeight + 'px';
 
     for(let i = 0; i < size; i++){
@@ -19,50 +19,41 @@ function createGrid(size){
 function changeColor(){
     currentColor = this.id;
 
-    if(this.id === "yellow" || this.id === "white" || this.id === "orange"){
+    //Creates a border around the current color option for user experience
+    if (currentColor === "yellow" || currentColor === "white" || currentColor === "orange"){
         this.style.border = "#906D2D 2px solid";
-        colorBoxes.forEach(x => {
-            if(x.id !== this.id){
-                x.style.removeProperty("border");
-            }
-        });
     }else{
         this.style.border = "#FFB62D 2px solid";
-        colorBoxes.forEach(x => {
-            if (x.id !== this.id) {
-                x.style.removeProperty("border");
-            }
-        });
     }
+
+    //Clears any active borders on any other previously chosen color for user experience
+    colorBoxes.forEach(colorBox => {
+        if (colorBox.id !== this.id) {
+            colorBox.style.removeProperty("border");
+        }
+    });
     
 }
 
 function addColor(){
-    //this.classList.add("black-bg");
     this.style.background = currentColor;
 }
-
-
-colorBoxes.forEach(x => {
-    x.addEventListener("click", changeColor);
-});
 
 //Activates 'drawing' action on click 
 //and Deactivates 'drawing' action once click is released.
 //This allows user to click and drag mouse to fill in boxes.
 
 window.addEventListener("mousedown", function(){
-    gridBoxes.forEach(x => {
-        x.addEventListener('mousemove', addColor);
+    gridBoxes.forEach(box => {
+        box.addEventListener('mousemove', addColor);
     });
 });
 
 window.addEventListener("mouseup", function () {
-    gridBoxes.forEach(x => {
-        x.removeEventListener('mousemove', addColor);
+    gridBoxes.forEach(box => {
+        box.removeEventListener('mousemove', addColor);
     });
 });
-
 
 
 function getUserInput(timesAsked){
@@ -74,7 +65,7 @@ function getUserInput(timesAsked){
         prompt = "The original Etch-A-Sketch grid size is 16x16. Please enter a number between 10 and 100 to determine a new grid size.";
     }
 
-    let input = window.prompt(prompt, "16");
+    const input = window.prompt(prompt, "16");
 
     if (input === null) {
         return 16;
@@ -86,10 +77,15 @@ function getUserInput(timesAsked){
 }
 
 function reset(){
-    let userInput = getUserInput(1);
+    //Gets a new grid size from user
+    const userInput = getUserInput(1);
     gridSize = userInput * userInput;
+
+    //Clears old grid
     gridBoxes.forEach(box => document.querySelector("#container").removeChild(box));
     gridBoxes = [];
+
+    //Sets new grid to new size from user input and creates new grid
     document.querySelector("#container").setAttribute('style', `grid-template:repeat(${userInput},1fr) / repeat(${userInput}, 1fr)`);
     createGrid(gridSize);
 }
@@ -98,5 +94,10 @@ function reset(){
 createGrid(gridSize);
 
 document.querySelector("#reset").addEventListener("click", reset);
+
+colorBoxes.forEach(colorBox => {
+    colorBox.addEventListener("click", changeColor);
+});
+
 
 

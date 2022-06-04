@@ -19,7 +19,6 @@ h1{
 }
 
 #container{
-    /* width:50%; */
     height:75vh;
     display:grid;
     grid-template: repeat(16,1fr) / repeat(16, 1fr);
