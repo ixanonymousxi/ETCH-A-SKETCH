@@ -18,6 +18,23 @@ function createGrid(size){
 
 function changeColor(){
     currentColor = this.id;
+
+    if(this.id === "yellow" || this.id === "white" || this.id === "orange"){
+        this.style.border = "#906D2D 2px solid";
+        colorBoxes.forEach(x => {
+            if(x.id !== this.id){
+                x.style.removeProperty("border");
+            }
+        });
+    }else{
+        this.style.border = "#FFB62D 2px solid";
+        colorBoxes.forEach(x => {
+            if (x.id !== this.id) {
+                x.style.removeProperty("border");
+            }
+        });
+    }
+    
 }
 
 function addColor(){

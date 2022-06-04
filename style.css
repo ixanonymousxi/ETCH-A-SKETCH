@@ -45,7 +45,18 @@ h1{
 
 #reset{
     width:100%;
-    padding:1rem 0;
+    padding:0.5rem 0;
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size:1.3em;
+    background: darkred;
+    color:white;
+    border:none;
+}
+
+#reset:hover{
+    background: black;
+    cursor: pointer;
 }
 
 #color-list{
@@ -62,4 +73,28 @@ h1{
     height: 50px;
     font-size:6px;
     border: 1px solid rgb(224, 224, 224);
+}
+
+#color-list li:hover{
+    border:white 1px solid;
+    box-shadow: 0px 0px 7px 3px;
+    cursor: pointer;
+}
+
+#color-list li.yellow:hover, #color-list li.white:hover{
+    border: darkgrey 1px solid;
+}
+
+#color-list li.white:hover{
+    box-shadow: 0px 0px 7px 3px lightgrey;
+}
+
+#color-list li:active {
+    border:  darkgrey 1px solid;
+    box-shadow: 0px 0px 7px 3px;
+    cursor: pointer;
+}
+
+#color-list li.yellow:active, #color-list li.white:active{
+    border: black 1px solid;
 }
